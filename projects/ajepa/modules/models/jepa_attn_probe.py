@@ -5,7 +5,7 @@ from typing import Union, Tuple
 import matplotlib.pyplot as plt
 import math
 import os
-from ajepa.ijepa.src.models.vision_transformer import (
+from ajepa.ijep2.src.models.vision_transformer import (
     vit_tiny, vit_small, vit_base, vit_large, vit_huge, vit_giant
 )
 
