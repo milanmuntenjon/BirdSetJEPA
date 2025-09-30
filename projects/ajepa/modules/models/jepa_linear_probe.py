@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from typing import Union, Tuple
 
-from ajepa.ijepa.src.models.vision_transformer import (
+from ajepa.ijepa2.src.models.vision_transformer import (
     vit_tiny, vit_small, vit_base, vit_large, vit_huge, vit_giant
 )
 
