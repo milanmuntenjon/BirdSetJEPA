@@ -24,3 +24,4 @@ test:
   num_workers: 4
   drop_last: False
   pin_memory: False
+  

@@ -20,12 +20,13 @@ logs/*
 output/*
 
 data_birdset/*
+/workspace/projects/ijepa_meta/workspace/data_birdset/*
 data_gadme/*
 data_birdset
 notebooks/dev/*
 dataset_/*
-
-
+models/*
+outputs/*
 birdset/output/*
 # Byte-compiled / optimized / DLL files
 __pycache__/

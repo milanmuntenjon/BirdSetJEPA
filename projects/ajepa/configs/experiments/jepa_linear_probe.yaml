@@ -1,0 +1,90 @@
+# @package _global_
+#package global is neccessary!
+defaults:
+  - /datamodule: HSN.yaml
+  - /module: multilabel.yaml
+
+  - /callbacks: default.yaml
+  - /trainer: single_gpu.yaml
+
+  - /paths: default.yaml
+  - /hydra: default.yaml
+  - /logger: wandb.yaml
+  - override /module/network: ijepa.yaml
+
+seed: 3
+train: True
+test: True
+ 
+start_time: ${now:%Y-%m-%d_%H-%M-%S}
+
+task_name: multilabel 
+module:
+  optimizer:
+    lr: 5e-3
+    weight_decay: 5e-4
+    
+  loss:
+
+    _target_: torch.nn.BCEWithLogitsLoss
+
+  network:
+    torch_compile: False
+    model:
+      _target_: ajepa.modules.models.jepa_linear_probe.LinearProbeJepa
+      freeze_backbone: True
+      checkpoint_path: /workspace/outputs/2025-09-28/06-12-50/callback_checkpoints/checkpoint-00.ckpt   
+
+
+trainer:
+  min_epochs: 1
+  max_epochs: 15
+  devices: [1]
+ 
+datamodule:
+  dataset:
+    val_split: 0.2
+    class_weights_loss: null
+    class_weights_sampler: null
+    classlimit: 500
+    eventlimit: 5
+  #transforms:
+  #  max_length: ${module.network.length}
+  #  nocall_sampler:
+  #    length: ${module.network.length}
+
+  loaders:
+    train:
+      batch_size: 128
+      shuffle: True
+      num_workers: 16
+      drop_last: True
+      prefetch_factor: 2
+ 
+    valid:
+      batch_size: 64
+      num_workers: 16
+      shuffle: False
+   
+    test:
+      batch_size: 32
+      num_workers: 16
+      shuffle: False
+ 
+  mapper:
+    biggest_cluster: True
+    no_call: False
+ 
+callbacks:
+  model_checkpoint:
+    save_top_k: 1
+    every_n_epochs: 1
+    every_n_train_steps: null
+  early_stopping:
+    _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: "val/BCEWithLogitsLoss_epoch"
+    patience: 3
+    mode: 'min'
+    min_delta: 1e-4
+    verbose: False
+    check_finite: True

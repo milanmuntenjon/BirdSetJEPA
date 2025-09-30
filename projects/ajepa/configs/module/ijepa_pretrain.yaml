@@ -1,0 +1,6 @@
+
+_target_: ajepa.modules.ijepa_pretrain_module.IJEPAPretrainModule
+lr: 0.00003
+weight_decay: 0.005
+task: multilabel
+metrics: {}

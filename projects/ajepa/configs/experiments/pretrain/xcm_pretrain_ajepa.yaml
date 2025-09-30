@@ -1,0 +1,52 @@
+# @package _global_
+#package global is neccessary!
+
+defaults:
+  - /datamodule: XCM
+  - /module: ijepa_pretrain
+  - /trainer: default
+  - /callbacks: default
+  - /logger: wandb
+  - /paths: default
+  - /module/network: ijepa
+
+start_time: ${now:%Y-%m-%d_%H-%M-%S}
+seed: 42
+train: true
+test: false   
+save: true
+
+module:
+  network:
+    model:
+      masking_strategy: timefreq
+trainer:
+  min_epochs: 12
+  max_epochs: 12
+  limit_val_batches: 0
+  accelerator: "auto"
+
+
+datamodule:
+  dataset:
+    val_split: null
+    class_weights_loss: null
+    class_weights_sampler: null
+    classlimit: 500
+    eventlimit: 5
+    direct_fingerprint: null
+
+  loaders:
+    train:
+      batch_size: 32
+      num_workers: 8
+
+
+
+callbacks:
+  model_checkpoint:
+    save_top_k: -1
+    monitor: null
+    save_on_train_epoch_end: True
+    every_n_epochs: 1
+    filename: 'checkpoint-{epoch:02d}'
