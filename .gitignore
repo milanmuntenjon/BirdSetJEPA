@@ -1,3 +1,4 @@
+!projects/ajepa/ijepa/**
 __pycache__
 wandb/
 *.egg-info
