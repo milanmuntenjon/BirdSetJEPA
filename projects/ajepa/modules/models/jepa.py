@@ -51,7 +51,7 @@ class JEPA(nn.Module):
         aspect_ratio: Tuple[float, float] = (0.75, 1.5),
         min_keep: int = 10,
         allow_overlap: bool = False,
-        masking_strategy: str = "timefreq",
+        masking_strategy: str = "multiblock",
 
         ema_decay: float = 0.996,
 
