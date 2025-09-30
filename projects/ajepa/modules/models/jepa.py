@@ -8,11 +8,11 @@ from typing import List, Tuple, Optional, Union
 from ajepa.ijepa.src.models.vision_transformer import (
     vit_tiny, vit_small, vit_base, vit_large, vit_huge, vit_giant, vit_predictor
 )
-from ajepa.ijepa.src.masks.multiblock import MaskCollator as MultiBlockMaskCollator
-from ajepa.ijepa.src.masks.curriculum import MaskCollator as TimeFreqMaskCollator
-from ajepa.ijepa.src.masks.harmonics import MaskCollator as HarmonicsMaskCollator
-from ajepa.ijepa.src.masks.utils import apply_masks
-from ajepa.ijepa.src.utils.tensors import repeat_interleave_batch
+from ajepa.ijepa2.src.masks.multiblock import MaskCollator as MultiBlockMaskCollator
+from ajepa.ijepa2.src.masks.curriculum import MaskCollator as TimeFreqMaskCollator
+from ajepa.ijepa2.src.masks.harmonics import MaskCollator as HarmonicsMaskCollator
+from ajepa.ijepa2.src.masks.utils import apply_masks
+from ajepa.ijepa2.src.utils.tensors import repeat_interleave_batch
 
 
 VIT_FNS = {
